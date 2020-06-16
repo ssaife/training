@@ -55,14 +55,7 @@ def testfile(filename):
             fileout.write("Case #" + str(i) + "Invalid Input" + "\n")
             i = i + 1
             continue
-        # check if NULL
-        try:
-            n
-        except:
-            result.append("NULL Value")
-            fileout.write("Case #" + str(i) + "NULL Value" + "\n")
-            i = i + 1
-            continue
+        # check if negative
         if n.startswith('-'):
             result.append("Negative Numbers Not Accepted")
             fileout.write("Case #" + str(i) + "Negative Numbers Not Accepted" + "\n")

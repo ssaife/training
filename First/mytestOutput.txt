@@ -1,0 +1,5 @@
+Case #1: 8999
+Case #2Negative Numbers Not Accepted
+Case #3Invalid Input
+Case #4Invalid Input
+Case #5: 44
