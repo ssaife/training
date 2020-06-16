@@ -1,7 +1,7 @@
 import os
 
 
-def tidynum(num):
+def findTidyNum(num):
     # type: (str) -> str
     """
     Function to find closest
@@ -31,8 +31,14 @@ def testfile(filename):
     Function to process a file
     by its name
     """
+    # store results
+    result = []
     # open read file
-    filein = open(filename, 'r')
+    try:
+        filein = open(filename, 'r')
+    except:
+        result.append("File Not Found")
+        return result
     # open close file, same name of the input file but with additional prefix
     fileout = open(os.path.splitext(filename)[0] + 'Output.txt', 'w')
     # read the first line containing the number of test cases
@@ -41,12 +47,41 @@ def testfile(filename):
     i = 1
     # loop over the file lines - each contains a string value represents the number to be tested
     for n in filein:
-        # write the result into the output file
-        fileout.write("Case #" + str(i) + ": " + tidynum(n.strip()).lstrip('0') + "\n")
+        # check if string
+        try:
+            int(n.lstrip('-+'))
+        except ValueError:
+            result.append("Invalid Input")
+            fileout.write("Case #" + str(i) + "Invalid Input" + "\n")
+            i = i + 1
+            continue
+        # check if NULL
+        try:
+            n
+        except:
+            result.append("NULL Value")
+            fileout.write("Case #" + str(i) + "NULL Value" + "\n")
+            i = i + 1
+            continue
+        if n.startswith('-'):
+            result.append("Negative Numbers Not Accepted")
+            fileout.write("Case #" + str(i) + "Negative Numbers Not Accepted" + "\n")
+            i = i + 1
+            continue
+        if len(n) > 8:
+            result.append("Out Of Range")
+            fileout.write("Case #" + str(i) + "Out Of Range" + "\n")
+            i = i + 1
+            continue
+        # write the result into the output file without leading zeros
+        nres = findTidyNum(n.strip()).lstrip('0')
+        result.append(nres)
+        fileout.write("Case #" + str(i) + ": " + nres + "\n")
         i = i + 1
     # close opened files
     filein.close()
     fileout.close()
+    return result
 
 
 # driver code - pass test files by its name
