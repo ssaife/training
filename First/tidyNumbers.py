@@ -61,11 +61,6 @@ def testfile(filename):
             fileout.write("Case #" + str(i) + ": Negative Numbers Not Accepted" + "\n")
             i = i + 1
             continue
-        if len(n) > 8:
-            result.append("Out Of Range")
-            fileout.write("Case #" + str(i) + ": Out Of Range" + "\n")
-            i = i + 1
-            continue
         # write the result into the output file without leading zeros
         nres = findTidyNum(n.strip()).lstrip('0')
         result.append(nres)
